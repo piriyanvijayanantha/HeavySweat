@@ -1,4 +1,4 @@
-package org.example;
+package ch.fhnw;
 
 
 public class App 
@@ -7,4 +7,7 @@ public class App
     {
         System.out.println( "Hello World!" );
     }
+
+
+
 }
