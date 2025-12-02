@@ -1,5 +1,12 @@
 package ch.fhnw.repository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
+
 public interface Excercises {
-    //TODO: Interfacestruktur machen und DB connection
+   LocalTime getDuration();
+   LocalDate getDate();
+   String getTitle();
+
 }
