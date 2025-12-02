@@ -1,11 +1,13 @@
 package ch.fhnw;
 
 
-public class App 
+import ch.fhnw.ui.UserInteraction;
+
+public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        new UserInteraction().run();
     }
 
 
