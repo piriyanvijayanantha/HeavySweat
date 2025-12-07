@@ -1,6 +1,6 @@
-package ch.fhnw.domain.impl;
+package ch.fhnw.model.impl;
 
-import ch.fhnw.domain.StrengthWorkout;
+import ch.fhnw.model.StrengthWorkout;
 
 /**
  * Konkrete Implementierung eines Bankdrücken-Workouts.

@@ -1,9 +1,9 @@
 package ch.fhnw.ui;
 
-import ch.fhnw.domain.Workout;
-import ch.fhnw.domain.impl.BenchPress;
-import ch.fhnw.domain.impl.HamstringStretch;
-import ch.fhnw.domain.impl.Running;
+import ch.fhnw.model.Workout;
+import ch.fhnw.model.impl.BenchPress;
+import ch.fhnw.model.impl.HamstringStretch;
+import ch.fhnw.model.impl.Running;
 import ch.fhnw.repository.WorkoutRepository;
 
 import java.util.List;

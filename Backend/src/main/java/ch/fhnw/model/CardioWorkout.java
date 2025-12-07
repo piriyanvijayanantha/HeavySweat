@@ -1,4 +1,4 @@
-package ch.fhnw.domain;
+package ch.fhnw.model;
 
 /**
  * Interface für Cardio-Workouts.

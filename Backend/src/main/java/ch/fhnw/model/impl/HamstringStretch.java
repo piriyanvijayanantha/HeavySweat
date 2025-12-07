@@ -1,33 +1,33 @@
-package ch.fhnw.domain.impl;
+package ch.fhnw.model.impl;
 
-import ch.fhnw.domain.CardioWorkout;
+import ch.fhnw.model.StretchWorkout;
 
 /**
- * Konkrete Implementierung eines Lauf-Workouts.
- * Implementiert das CardioWorkout-Interface.
+ * Konkrete Implementierung eines Hamstring-Dehnungs-Workouts.
+ * Implementiert das StretchWorkout-Interface.
  *
  * @author PROG1 Team - Person 2
  * @version 1.0
  */
-public class Running implements CardioWorkout {
+public class HamstringStretch implements StretchWorkout {
 
     private int id;
     private String name;
     private int duration; // in Minuten
-    private double distance; // in Kilometern
+    private String muscleGroup;
 
     /**
-     * Konstruktor für ein Running-Workout.
+     * Konstruktor für ein HamstringStretch-Workout.
      *
      * @param name Name des Workouts
      * @param duration Dauer in Minuten
-     * @param distance Distanz in Kilometern
+     * @param muscleGroup Betroffene Muskelgruppe
      */
-    public Running(String name, int duration, double distance) {
-        this.id = -1; // noch nicht in DB gespeichert
+    public HamstringStretch(String name, int duration, String muscleGroup) {
+        this.id = -1;
         this.name = name;
         this.duration = duration;
-        this.distance = distance;
+        this.muscleGroup = muscleGroup;
     }
 
     /**
@@ -36,13 +36,13 @@ public class Running implements CardioWorkout {
      * @param id Workout-ID
      * @param name Name des Workouts
      * @param duration Dauer in Minuten
-     * @param distance Distanz in Kilometern
+     * @param muscleGroup Betroffene Muskelgruppe
      */
-    public Running(int id, String name, int duration, double distance) {
+    public HamstringStretch(int id, String name, int duration, String muscleGroup) {
         this.id = id;
         this.name = name;
         this.duration = duration;
-        this.distance = distance;
+        this.muscleGroup = muscleGroup;
     }
 
     @Override
@@ -57,18 +57,18 @@ public class Running implements CardioWorkout {
 
     @Override
     public String getCategory() {
-        return "Cardio";
+        return "Stretch";
     }
 
     @Override
-    public double getDistance() {
-        return distance;
+    public String getMuscleGroup() {
+        return muscleGroup;
     }
 
     @Override
     public double getCalories() {
-        // Formel: Distanz × 60 (ca. 60 kcal pro km beim Laufen)
-        return distance * 60.0;
+        // Formel: Dauer × 2 (Dehnung verbrennt wenig Kalorien)
+        return duration * 2.0;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class Running implements CardioWorkout {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s - %d min, %.2f km, %.0f kcal, %.1f km/h",
-                getCategory(), name, duration, distance, getCalories(), getAverageSpeed());
+        return String.format("[%s] %s - %d min, Muskel: %s, %.0f kcal",
+                getCategory(), name, duration, muscleGroup, getCalories());
     }
 }

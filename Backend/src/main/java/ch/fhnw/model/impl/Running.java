@@ -1,33 +1,33 @@
-package ch.fhnw.domain.impl;
+package ch.fhnw.model.impl;
 
-import ch.fhnw.domain.StretchWorkout;
+import ch.fhnw.model.CardioWorkout;
 
 /**
- * Konkrete Implementierung eines Hamstring-Dehnungs-Workouts.
- * Implementiert das StretchWorkout-Interface.
+ * Konkrete Implementierung eines Lauf-Workouts.
+ * Implementiert das CardioWorkout-Interface.
  *
  * @author PROG1 Team - Person 2
  * @version 1.0
  */
-public class HamstringStretch implements StretchWorkout {
+public class Running implements CardioWorkout {
 
     private int id;
     private String name;
     private int duration; // in Minuten
-    private String muscleGroup;
+    private double distance; // in Kilometern
 
     /**
-     * Konstruktor für ein HamstringStretch-Workout.
+     * Konstruktor für ein Running-Workout.
      *
      * @param name Name des Workouts
      * @param duration Dauer in Minuten
-     * @param muscleGroup Betroffene Muskelgruppe
+     * @param distance Distanz in Kilometern
      */
-    public HamstringStretch(String name, int duration, String muscleGroup) {
-        this.id = -1;
+    public Running(String name, int duration, double distance) {
+        this.id = -1; // noch nicht in DB gespeichert
         this.name = name;
         this.duration = duration;
-        this.muscleGroup = muscleGroup;
+        this.distance = distance;
     }
 
     /**
@@ -36,13 +36,13 @@ public class HamstringStretch implements StretchWorkout {
      * @param id Workout-ID
      * @param name Name des Workouts
      * @param duration Dauer in Minuten
-     * @param muscleGroup Betroffene Muskelgruppe
+     * @param distance Distanz in Kilometern
      */
-    public HamstringStretch(int id, String name, int duration, String muscleGroup) {
+    public Running(int id, String name, int duration, double distance) {
         this.id = id;
         this.name = name;
         this.duration = duration;
-        this.muscleGroup = muscleGroup;
+        this.distance = distance;
     }
 
     @Override
@@ -57,18 +57,18 @@ public class HamstringStretch implements StretchWorkout {
 
     @Override
     public String getCategory() {
-        return "Stretch";
+        return "Cardio";
     }
 
     @Override
-    public String getMuscleGroup() {
-        return muscleGroup;
+    public double getDistance() {
+        return distance;
     }
 
     @Override
     public double getCalories() {
-        // Formel: Dauer × 2 (Dehnung verbrennt wenig Kalorien)
-        return duration * 2.0;
+        // Formel: Distanz × 60 (ca. 60 kcal pro km beim Laufen)
+        return distance * 60.0;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class HamstringStretch implements StretchWorkout {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s - %d min, Muskel: %s, %.0f kcal",
-                getCategory(), name, duration, muscleGroup, getCalories());
+        return String.format("[%s] %s - %d min, %.2f km, %.0f kcal, %.1f km/h",
+                getCategory(), name, duration, distance, getCalories(), getAverageSpeed());
     }
 }
