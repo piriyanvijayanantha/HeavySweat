@@ -1,0 +1,99 @@
+package ch.fhnw.domain.impl;
+
+import com.fitnesstracker.domain.StrengthWorkout;
+
+/**
+ * Konkrete Implementierung eines Bankdrücken-Workouts.
+ * Implementiert das StrengthWorkout-Interface.
+ *
+ * @author PROG1 Team - Person 2
+ * @version 1.0
+ */
+public class BenchPress implements StrengthWorkout {
+
+    private int id;
+    private String name;
+    private int duration; // in Minuten
+    private int sets;
+    private int reps;
+
+    /**
+     * Konstruktor für ein BenchPress-Workout.
+     *
+     * @param name Name des Workouts
+     * @param duration Dauer in Minuten
+     * @param sets Anzahl Sätze
+     * @param reps Anzahl Wiederholungen pro Satz
+     */
+    public BenchPress(String name, int duration, int sets, int reps) {
+        this.id = -1;
+        this.name = name;
+        this.duration = duration;
+        this.sets = sets;
+        this.reps = reps;
+    }
+
+    /**
+     * Konstruktor für Workout aus Datenbank (mit ID).
+     *
+     * @param id Workout-ID
+     * @param name Name des Workouts
+     * @param duration Dauer in Minuten
+     * @param sets Anzahl Sätze
+     * @param reps Anzahl Wiederholungen pro Satz
+     */
+    public BenchPress(int id, String name, int duration, int sets, int reps) {
+        this.id = id;
+        this.name = name;
+        this.duration = duration;
+        this.sets = sets;
+        this.reps = reps;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public int getDuration() {
+        return duration;
+    }
+
+    @Override
+    public String getCategory() {
+        return "Strength";
+    }
+
+    @Override
+    public int getSets() {
+        return sets;
+    }
+
+    @Override
+    public int getReps() {
+        return reps;
+    }
+
+    @Override
+    public double getCalories() {
+        // Formel: Sets × Reps × 0.5 (Krafttraining verbrennt ca. 0.5 kcal pro Rep)
+        return sets * reps * 0.5;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s - %d min, %d Sets × %d Reps = %d total, %.0f kcal",
+                getCategory(), name, duration, sets, reps, getTotalReps(), getCalories());
+    }
+}
