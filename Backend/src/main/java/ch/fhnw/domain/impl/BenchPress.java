@@ -1,6 +1,6 @@
 package ch.fhnw.domain.impl;
 
-import com.fitnesstracker.domain.StrengthWorkout;
+import ch.fhnw.domain.StrengthWorkout;
 
 /**
  * Konkrete Implementierung eines Bankdrücken-Workouts.

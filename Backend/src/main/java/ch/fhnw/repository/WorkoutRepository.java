@@ -1,9 +1,9 @@
 package ch.fhnw.repository;
 
-import com.fitnesstracker.domain.Workout;
-import com.fitnesstracker.domain.impl.BenchPress;
-import com.fitnesstracker.domain.impl.HamstringStretch;
-import com.fitnesstracker.domain.impl.Running;
+import ch.fhnw.domain.Workout;
+import ch.fhnw.domain.impl.BenchPress;
+import ch.fhnw.domain.impl.HamstringStretch;
+import ch.fhnw.domain.impl.Running;
 
 import java.sql.*;
 import java.util.ArrayList;

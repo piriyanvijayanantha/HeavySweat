@@ -1,6 +1,6 @@
 package ch.fhnw.domain.impl;
 
-import com.fitnesstracker.domain.StretchWorkout;
+import ch.fhnw.domain.StretchWorkout;
 
 /**
  * Konkrete Implementierung eines Hamstring-Dehnungs-Workouts.

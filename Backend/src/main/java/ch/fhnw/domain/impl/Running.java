@@ -1,6 +1,6 @@
 package ch.fhnw.domain.impl;
 
-import com.fitnesstracker.domain.CardioWorkout;
+import ch.fhnw.domain.CardioWorkout;
 
 /**
  * Konkrete Implementierung eines Lauf-Workouts.

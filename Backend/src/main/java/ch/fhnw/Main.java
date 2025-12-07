@@ -1,7 +1,7 @@
 package ch.fhnw;
 
-import com.fitnesstracker.repository.DatabaseConnection;
-import com.fitnesstracker.ui.ConsoleUI;
+import ch.fhnw.repository.DatabaseConnection;
+import ch.fhnw.ui.ConsoleUI;
 
 /**
  * Hauptklasse des Fitnesstracker-Programms.
