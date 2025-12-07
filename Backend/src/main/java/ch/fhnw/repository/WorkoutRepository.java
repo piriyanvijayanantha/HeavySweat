@@ -25,6 +25,11 @@ public class WorkoutRepository {
      */
     public WorkoutRepository() {
         this.connection = DatabaseConnection.getInstance().getConnection();
+
+        // Sicherheitscheck
+        if (this.connection == null) {
+            throw new IllegalStateException("Datenbankverbindung ist null! Bitte SQLite JDBC Driver hinzufügen.");
+        }
     }
 
     /**
@@ -39,7 +44,7 @@ public class WorkoutRepository {
             VALUES (?, ?, ?, ?, ?, ?, ?)
             """;
 
-        try (PreparedStatement pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
             pstmt.setString(1, workout.getCategory());
             pstmt.setString(2, workout.getName());
             pstmt.setInt(3, workout.getDuration());
@@ -65,10 +70,12 @@ public class WorkoutRepository {
             int affectedRows = pstmt.executeUpdate();
 
             if (affectedRows > 0) {
-                // ID aus Datenbank holen und setzen
-                try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
-                    if (generatedKeys.next()) {
-                        workout.setId(generatedKeys.getInt(1));
+                // ID aus Datenbank holen - SQLite-spezifische Methode
+                String lastIdSql = "SELECT last_insert_rowid()";
+                try (Statement stmt = connection.createStatement();
+                     ResultSet rs = stmt.executeQuery(lastIdSql)) {
+                    if (rs.next()) {
+                        workout.setId(rs.getInt(1));
                     }
                 }
                 return true;

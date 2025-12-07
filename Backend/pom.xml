@@ -6,11 +6,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ch.fhnw</groupId>
-    <artifactId>fitnesstracker-mini</artifactId>
+    <artifactId>Backend</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>Fitnesstracker Mini</name>
+    <name>Heavy Sweat</name>
     <description>PROG1 Projekt - Schnittstellen entwerfen und implementieren</description>
 
     <properties>
@@ -72,7 +72,7 @@
                                     <mainClass>ch.fhnw.Main</mainClass>
                                 </transformer>
                             </transformers>
-                            <finalName>fitnesstracker-mini</finalName>
+                            <finalName>HeavySweat</finalName>
                         </configuration>
                     </execution>
                 </executions>
