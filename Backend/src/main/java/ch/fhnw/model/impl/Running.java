@@ -2,13 +2,6 @@ package ch.fhnw.model.impl;
 
 import ch.fhnw.model.CardioWorkout;
 
-/**
- * Konkrete Implementierung eines Lauf-Workouts.
- * Implementiert das CardioWorkout-Interface.
- *
- * @author PROG1 Team - Person 2
- * @version 1.0
- */
 public class Running implements CardioWorkout {
 
     private int id;
@@ -16,13 +9,6 @@ public class Running implements CardioWorkout {
     private int duration; // in Minuten
     private double distance; // in Kilometern
 
-    /**
-     * Konstruktor für ein Running-Workout.
-     *
-     * @param name Name des Workouts
-     * @param duration Dauer in Minuten
-     * @param distance Distanz in Kilometern
-     */
     public Running(String name, int duration, double distance) {
         this.id = -1; // noch nicht in DB gespeichert
         this.name = name;
@@ -30,14 +16,6 @@ public class Running implements CardioWorkout {
         this.distance = distance;
     }
 
-    /**
-     * Konstruktor für Workout aus Datenbank (mit ID).
-     *
-     * @param id Workout-ID
-     * @param name Name des Workouts
-     * @param duration Dauer in Minuten
-     * @param distance Distanz in Kilometern
-     */
     public Running(int id, String name, int duration, double distance) {
         this.id = id;
         this.name = name;
@@ -67,7 +45,6 @@ public class Running implements CardioWorkout {
 
     @Override
     public double getCalories() {
-        // Formel: Distanz × 60 (ca. 60 kcal pro km beim Laufen)
         return distance * 60.0;
     }
 

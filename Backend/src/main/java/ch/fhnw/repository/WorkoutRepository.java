@@ -9,35 +9,18 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Repository-Klasse für Workout-Verwaltung.
- * Implementiert die Datenbankoperationen (CRUD) für Workouts.
- *
- * @author PROG1 Team - Person 3
- * @version 1.0
- */
 public class WorkoutRepository {
 
     private final Connection connection;
 
-    /**
-     * Konstruktor initialisiert Repository mit Datenbankverbindung.
-     */
     public WorkoutRepository() {
         this.connection = DatabaseConnection.getInstance().getConnection();
 
-        // Sicherheitscheck
         if (this.connection == null) {
             throw new IllegalStateException("Datenbankverbindung ist null! Bitte SQLite JDBC Driver hinzufügen.");
         }
     }
 
-    /**
-     * Fügt ein neues Workout zur Datenbank hinzu.
-     *
-     * @param workout Das hinzuzufügende Workout
-     * @return true bei Erfolg, false bei Fehler
-     */
     public boolean add(Workout workout) {
         String sql = """
             INSERT INTO workouts (category, name, duration, distance, sets, reps, muscle_group)
@@ -49,7 +32,6 @@ public class WorkoutRepository {
             pstmt.setString(2, workout.getName());
             pstmt.setInt(3, workout.getDuration());
 
-            // Kategorie-spezifische Felder
             if (workout.getCategory().equals("Cardio")) {
                 pstmt.setDouble(4, ((Running) workout).getDistance());
                 pstmt.setNull(5, Types.INTEGER);
@@ -60,7 +42,7 @@ public class WorkoutRepository {
                 pstmt.setInt(5, ((BenchPress) workout).getSets());
                 pstmt.setInt(6, ((BenchPress) workout).getReps());
                 pstmt.setNull(7, Types.VARCHAR);
-            } else { // Stretch
+            } else {
                 pstmt.setNull(4, Types.REAL);
                 pstmt.setNull(5, Types.INTEGER);
                 pstmt.setNull(6, Types.INTEGER);
@@ -70,7 +52,6 @@ public class WorkoutRepository {
             int affectedRows = pstmt.executeUpdate();
 
             if (affectedRows > 0) {
-                // ID aus Datenbank holen - SQLite-spezifische Methode
                 String lastIdSql = "SELECT last_insert_rowid()";
                 try (Statement stmt = connection.createStatement();
                      ResultSet rs = stmt.executeQuery(lastIdSql)) {
@@ -89,11 +70,6 @@ public class WorkoutRepository {
         return false;
     }
 
-    /**
-     * Lädt alle Workouts aus der Datenbank.
-     *
-     * @return Liste aller Workouts
-     */
     public List<Workout> getAll() {
         List<Workout> workouts = new ArrayList<>();
         String sql = "SELECT * FROM workouts ORDER BY created_at DESC";
@@ -116,12 +92,6 @@ public class WorkoutRepository {
         return workouts;
     }
 
-    /**
-     * Lädt alle Workouts einer bestimmten Kategorie.
-     *
-     * @param category Die Kategorie (Cardio, Strength, Stretch)
-     * @return Liste der Workouts in dieser Kategorie
-     */
     public List<Workout> getByCategory(String category) {
         List<Workout> workouts = new ArrayList<>();
         String sql = "SELECT * FROM workouts WHERE category = ? ORDER BY created_at DESC";
@@ -145,11 +115,6 @@ public class WorkoutRepository {
         return workouts;
     }
 
-    /**
-     * Zählt die Anzahl aller Workouts.
-     *
-     * @return Anzahl Workouts
-     */
     public int count() {
         String sql = "SELECT COUNT(*) FROM workouts";
 
@@ -168,11 +133,6 @@ public class WorkoutRepository {
         return 0;
     }
 
-    /**
-     * Berechnet die Gesamtdauer aller Workouts.
-     *
-     * @return Gesamtdauer in Minuten
-     */
     public int totalDuration() {
         String sql = "SELECT SUM(duration) FROM workouts";
 
@@ -191,20 +151,12 @@ public class WorkoutRepository {
         return 0;
     }
 
-    /**
-     * Erstellt ein Workout-Objekt aus einem ResultSet.
-     * Demonstriert Polymorphie: Rückgabe als Workout-Interface.
-     *
-     * @param rs ResultSet mit Workout-Daten
-     * @return Workout-Objekt oder null bei Fehler
-     */
     private Workout createWorkoutFromResultSet(ResultSet rs) throws SQLException {
         int id = rs.getInt("id");
         String category = rs.getString("category");
         String name = rs.getString("name");
         int duration = rs.getInt("duration");
 
-        // Polymorphie: Je nach Kategorie wird die passende Klasse instanziert
         return switch (category) {
             case "Cardio" -> new Running(
                     id,

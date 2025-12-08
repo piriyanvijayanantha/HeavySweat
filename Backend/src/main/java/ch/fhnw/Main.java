@@ -3,23 +3,10 @@ package ch.fhnw;
 import ch.fhnw.repository.DatabaseConnection;
 import ch.fhnw.ui.ConsoleUI;
 
-/**
- * Hauptklasse des Fitnesstracker-Programms.
- * Startet die Anwendung und verwaltet den Lebenszyklus.
- *
- * @author PROG1 Team
- * @version 1.0
- */
 public class Main {
 
-    /**
-     * Main-Methode - Einstiegspunkt der Anwendung.
-     *
-     * @param args Kommandozeilenargumente (nicht verwendet)
-     */
     public static void main(String[] args) {
         try {
-            // UI starten
             ConsoleUI ui = new ConsoleUI();
             ui.start();
 
@@ -28,7 +15,6 @@ public class Main {
             e.printStackTrace();
 
         } finally {
-            // Datenbankverbindung ordnungsgemäß schließen
             DatabaseConnection.getInstance().close();
         }
     }

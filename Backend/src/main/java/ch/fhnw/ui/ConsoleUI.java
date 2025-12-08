@@ -9,31 +9,18 @@ import ch.fhnw.repository.WorkoutRepository;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Konsolen-Benutzeroberfläche für den Fitnesstracker.
- * Bietet ein Menü zur Interaktion mit dem System.
- *
- * @author PROG1 Team - Person 3
- * @version 1.0
- */
 public class ConsoleUI {
 
     private final WorkoutRepository repository;
     private final Scanner scanner;
     private boolean running;
 
-    /**
-     * Konstruktor initialisiert UI mit Repository.
-     */
     public ConsoleUI() {
         this.repository = new WorkoutRepository();
         this.scanner = new Scanner(System.in);
         this.running = true;
     }
 
-    /**
-     * Startet die Benutzeroberfläche.
-     */
     public void start() {
         printWelcome();
 
@@ -53,9 +40,6 @@ public class ConsoleUI {
         }
     }
 
-    /**
-     * Zeigt Willkommensnachricht.
-     */
     private void printWelcome() {
         System.out.println("╔══════════════════════════════════════╗");
         System.out.println("║   🏋️  FITNESSTRACKER MINI v1.0  🏃   ║");
@@ -64,9 +48,6 @@ public class ConsoleUI {
         System.out.println();
     }
 
-    /**
-     * Zeigt das Hauptmenü.
-     */
     private void printMenu() {
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
         System.out.println("  HAUPTMENÜ");
@@ -79,10 +60,6 @@ public class ConsoleUI {
         System.out.println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
     }
 
-    /**
-     * Erfasst ein neues Workout.
-     * Demonstriert Polymorphie: Speichert verschiedene Typen als Workout.
-     */
     private void addWorkout() {
         System.out.println("═══ WORKOUT ERFASSEN ═══\n");
         System.out.println("Wähle Kategorie:");
@@ -116,9 +93,6 @@ public class ConsoleUI {
         System.out.println();
     }
 
-    /**
-     * Erstellt ein Running-Workout durch Benutzereingaben.
-     */
     private Running createRunning() {
         System.out.println("─── Cardio: Running ───");
         String name = readString("Name (z.B. 'Morgen-Joggen'): ");
@@ -128,9 +102,6 @@ public class ConsoleUI {
         return new Running(name, duration, distance);
     }
 
-    /**
-     * Erstellt ein BenchPress-Workout durch Benutzereingaben.
-     */
     private BenchPress createBenchPress() {
         System.out.println("─── Strength: BenchPress ───");
         String name = readString("Name (z.B. 'Bankdrücken Heavy'): ");
@@ -141,9 +112,6 @@ public class ConsoleUI {
         return new BenchPress(name, duration, sets, reps);
     }
 
-    /**
-     * Erstellt ein HamstringStretch-Workout durch Benutzereingaben.
-     */
     private HamstringStretch createStretch() {
         System.out.println("─── Stretch: Dehnung ───");
         String name = readString("Name (z.B. 'Bein-Dehnung'): ");
@@ -153,10 +121,6 @@ public class ConsoleUI {
         return new HamstringStretch(name, duration, muscleGroup);
     }
 
-    /**
-     * Zeigt alle Workouts an.
-     * Demonstriert Polymorphie: List<Workout> enthält verschiedene Typen.
-     */
     private void showAllWorkouts() {
         System.out.println("═══ ALLE WORKOUTS ═══\n");
 
@@ -174,9 +138,6 @@ public class ConsoleUI {
         System.out.println("\nGesamt: " + workouts.size() + " Workouts\n");
     }
 
-    /**
-     * Zeigt Workouts nach Kategorie gefiltert an.
-     */
     private void showByCategory() {
         System.out.println("═══ NACH KATEGORIE FILTERN ═══\n");
         System.out.println("  1 → Cardio");
@@ -215,9 +176,6 @@ public class ConsoleUI {
         System.out.println("\nGesamt: " + workouts.size() + " Workouts\n");
     }
 
-    /**
-     * Zeigt Statistiken über alle Workouts an.
-     */
     private void showStatistics() {
         System.out.println("═══ STATISTIKEN ═══\n");
 
@@ -250,9 +208,6 @@ public class ConsoleUI {
         System.out.println();
     }
 
-    /**
-     * Beendet das Programm.
-     */
     private void exit() {
         System.out.println("═══ PROGRAMM BEENDEN ═══\n");
         System.out.println("Danke fürs Nutzen des Fitnesstrackers!");
@@ -260,17 +215,11 @@ public class ConsoleUI {
         running = false;
     }
 
-    /**
-     * Liest einen String vom Benutzer ein.
-     */
     private String readString(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine().trim();
     }
 
-    /**
-     * Liest eine Ganzzahl vom Benutzer ein.
-     */
     private int readInt(String prompt) {
         while (true) {
             try {
@@ -283,9 +232,6 @@ public class ConsoleUI {
         }
     }
 
-    /**
-     * Liest eine Dezimalzahl vom Benutzer ein.
-     */
     private double readDouble(String prompt) {
         while (true) {
             try {

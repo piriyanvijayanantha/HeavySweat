@@ -5,33 +5,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Singleton-Klasse für die SQLite-Datenbankverbindung.
- * Verwaltet die Verbindung zur Datenbank und erstellt die benötigten Tabellen.
- *
- * @author PROG1 Team - Person 3
- * @version 1.0
- */
+
 public class DatabaseConnection {
 
     private static final String DB_URL = "jdbc:sqlite:fitnesstracker.db";
     private static DatabaseConnection instance;
     private Connection connection;
 
-    /**
-     * Privater Konstruktor (Singleton Pattern).
-     * Initialisiert die Datenbankverbindung und erstellt Tabellen.
-     */
     private DatabaseConnection() {
         try {
-            // SQLite JDBC Treiber laden
             Class.forName("org.sqlite.JDBC");
 
-            // Verbindung zur Datenbank herstellen
             connection = DriverManager.getConnection(DB_URL);
             System.out.println("✓ Datenbankverbindung hergestellt: " + DB_URL);
 
-            // Tabellen erstellen falls nicht vorhanden
             createTables();
 
         } catch (ClassNotFoundException e) {
@@ -44,11 +31,6 @@ public class DatabaseConnection {
         }
     }
 
-    /**
-     * Gibt die Singleton-Instanz zurück.
-     *
-     * @return Die DatabaseConnection-Instanz
-     */
     public static synchronized DatabaseConnection getInstance() {
         if (instance == null) {
             instance = new DatabaseConnection();
@@ -56,19 +38,10 @@ public class DatabaseConnection {
         return instance;
     }
 
-    /**
-     * Gibt die aktive Datenbankverbindung zurück.
-     *
-     * @return Connection-Objekt
-     */
     public Connection getConnection() {
         return connection;
     }
 
-    /**
-     * Erstellt die benötigten Tabellen in der Datenbank.
-     * Verwendet IF NOT EXISTS, damit existierende Tabellen nicht überschrieben werden.
-     */
     private void createTables() {
         String createTableSQL = """
             CREATE TABLE IF NOT EXISTS workouts (
@@ -93,10 +66,6 @@ public class DatabaseConnection {
         }
     }
 
-    /**
-     * Schließt die Datenbankverbindung.
-     * Sollte beim Beenden der Anwendung aufgerufen werden.
-     */
     public void close() {
         try {
             if (connection != null && !connection.isClosed()) {
